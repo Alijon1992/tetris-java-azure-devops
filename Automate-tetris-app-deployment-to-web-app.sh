@@ -12,7 +12,7 @@ IMAGE_NAME="my-tetris-app:latest"
 #Systemctl?
 
 # Build the Docker image for the correct platform
-docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME --platform linux/amd64 .
+docker build -t acrtetris.azurecr.io/my-tetris-app:latest --platform linux/amd64 .
 
 # Create a resource group
 az group create --name $RESOURCE_GROUP --location $LOCATION
@@ -21,10 +21,10 @@ az group create --name $RESOURCE_GROUP --location $LOCATION
 az acr create --resource-group $RESOURCE_GROUP --name $ACR_NAME --sku Basic --location $LOCATION --admin-enabled true
 
 # Log in to ACR
-az acr login --name $ACR_NAME
+az acr login --name acrtetris
 
 # Push the Docker image to ACR
-docker push $ACR_NAME.azurecr.io/$IMAGE_NAME
+docker push acrtetris.azurecr.io/my-tetris-app:latest
 
 # Create an App Service plan
 az appservice plan create --name $PLAN_NAME --resource-group $RESOURCE_GROUP --sku B1 --is-linux
